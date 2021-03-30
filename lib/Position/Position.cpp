@@ -24,3 +24,7 @@
     }
     else return false;
   }
+
+  bool Position::inMatrix(const int matrixLength){
+    return (row<=matrixLength && row>=1 && column<=matrixLength && column>=1);
+  }

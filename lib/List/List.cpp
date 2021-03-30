@@ -46,19 +46,19 @@
 }
 
  
-int&  List::getCurrent()
+Position&  List::getCurrent()
 {
   return curr->element;
 }
 
  
-int&  List::First() const
+Position&  List::First() const
 {
   return head->element;
 }
 
  
-int&  List::Last() const
+Position&  List::Last() const
 {
   return tail->element;
 }
@@ -70,7 +70,7 @@ int  List::getLength()
 }
 
  
-void  List::Append( int element)
+void  List::Append( Position element)
 {
      ListNode * node = new  ListNode(element, tail, nullptr);
 
@@ -137,7 +137,7 @@ bool  List::prev()
 }
 
  
-void  List::Delete(int & elem)
+void  List::Delete(Position & elem)
 {
     if(Search(elem))
         DeleteCurrent();
@@ -159,7 +159,7 @@ void  List::DeleteCurrent()
     if(length == 0)
         head = curr = tail = nullptr;
     else if(curr == head)
-        curr = head = head->next;
+        curr = head = head->next; 
     else if(curr == tail)
         curr = tail = tail->prev;
     else
@@ -169,7 +169,7 @@ void  List::DeleteCurrent()
 }
 
  
-bool  List::Search(int elem)
+bool  List::Search(Position elem)
 {
     if(length == 0)
         return false;
@@ -196,7 +196,7 @@ void  List::PutFirstToLast()
 }
 
  
-void  List::Update(int elem)
+void  List::Update(Position elem)
 {
     if(Search(elem))
         curr->element = elem;
@@ -207,7 +207,7 @@ void  List::Clear()
 {
     if(length == 0)
         return;
-     ListNode * temp = head;
+    ListNode * temp = head;
 
     while(temp != nullptr)
     {

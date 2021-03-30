@@ -1,14 +1,15 @@
 #ifndef List_hpp
 #define List_hpp
 
+#include <Position.h>
 
 class ListNode {
   public:
-    int element;
+    Position element;
     ListNode* next;
     ListNode* prev;
 
-    ListNode(int element, ListNode* prev, ListNode* next) : element(element)
+    ListNode(Position element, ListNode* prev, ListNode* next) : element(element)
     {
       this->next = next;
       this->prev = prev;
@@ -25,24 +26,25 @@ class List  {
     List();
     List(const List&);
     ~List();
-    int& getCurrent();
-    int& First() const;
-    int& Last() const;
+    Position& getCurrent();
+    Position& First() const;
+    Position& Last() const;
     int getLength();
-    void Append(int);
+    void Append(Position);
     void DeleteLast();
     void DeleteFirst();
     void DeleteCurrent();
     bool next();
     bool moveToStart();
     bool prev();
-    void Delete(int&);
-    bool Search(int);
+    void Delete(Position&);
+    bool Search(Position);
     void Clear();
     void PutFirstToLast();
-    void Update(int elem);
+    void Update(Position elem);
     List& operator = (const List&);
 };
 
+// S'assurer que les positions sont toutes différentes les unes des autres 
 
 #endif
