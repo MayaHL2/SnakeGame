@@ -1,5 +1,5 @@
-#ifndef mathematics_hpp
-#define mathematics_hpp
+#ifndef Mathematics_hpp
+#define Mathematics_hpp
 
 int power(int x,int n);
 

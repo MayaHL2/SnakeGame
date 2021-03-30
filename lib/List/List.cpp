@@ -1,23 +1,21 @@
-#include "LinkedList.h"
+#include <List.h>
 
 
-
-template <class T>
-LinkedList<T>::LinkedList() {
+ List::List() {
     length = 0;
     head = nullptr;
     tail = nullptr;
     curr = nullptr;
 }
 
-template <class T>
-LinkedList<T>::LinkedList(const LinkedList<T> & list) {
+ 
+ List::List(const  List & list) {
     length = 0;
     head = nullptr;
     tail = nullptr;
     curr = nullptr;
 
-    ListNode<T> * temp = list.head;
+     ListNode * temp = list.head;
 
     while(temp != nullptr)
     {
@@ -26,12 +24,12 @@ LinkedList<T>::LinkedList(const LinkedList<T> & list) {
     }
 }
 
-template <class T>
-LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & list)
+ 
+ List &  List::operator=(const  List & list)
 {
     Clear();
 
-    ListNode<T> * temp = list.head;
+     ListNode * temp = list.head;
 
     while(temp != nullptr)
     {
@@ -42,39 +40,39 @@ LinkedList<T> & LinkedList<T>::operator=(const LinkedList<T> & list)
     return *this;
 }
 
-template <class T>
-LinkedList<T>::~LinkedList() {
+ 
+ List::~ List() {
     Clear();
 }
 
-template<class T>
-T& LinkedList<T>::getCurrent()
+ 
+int&  List::getCurrent()
 {
   return curr->element;
 }
 
-template<class T>
-T& LinkedList<T>::First() const
+ 
+int&  List::First() const
 {
   return head->element;
 }
 
-template<class T>
-T& LinkedList<T>::Last() const
+ 
+int&  List::Last() const
 {
   return tail->element;
 }
 
-template<class T>
-int LinkedList<T>::getLength()
+ 
+int  List::getLength()
 {
   return length;
 }
 
-template <class T>
-void LinkedList<T>::Append(T element)
+ 
+void  List::Append( int element)
 {
-    ListNode<T> * node = new ListNode<T>(element, tail, nullptr);
+     ListNode * node = new  ListNode(element, tail, nullptr);
 
     if(length == 0)
         curr = tail = head = node;
@@ -87,8 +85,8 @@ void LinkedList<T>::Append(T element)
 
 }
 
-template <class T>
-void LinkedList<T>::DeleteLast()
+ 
+void  List::DeleteLast()
 {
     if(length == 0)
       return;
@@ -96,8 +94,8 @@ void LinkedList<T>::DeleteLast()
     DeleteCurrent();
 }
 
-template <class T>
-void LinkedList<T>::DeleteFirst()
+ 
+void  List::DeleteFirst()
 {
     if(length == 0)
       return;
@@ -105,8 +103,8 @@ void LinkedList<T>::DeleteFirst()
     DeleteCurrent();
 }
 
-template <class T>
-bool LinkedList<T>::next()
+ 
+bool  List::next()
 {
     if(length == 0)
         return false;
@@ -118,15 +116,15 @@ bool LinkedList<T>::next()
     return true;
 }
 
-template <class T>
-bool LinkedList<T>::moveToStart()
+ 
+bool  List::moveToStart()
 {
     curr = head;
     return length != 0;
 }
 
-template<class T>
-bool LinkedList<T>::prev()
+ 
+bool  List::prev()
 {
     if(length == 0)
         return false;
@@ -138,20 +136,20 @@ bool LinkedList<T>::prev()
     return true;
 }
 
-template <class T>
-void LinkedList<T>::Delete(T & elem)
+ 
+void  List::Delete(int & elem)
 {
     if(Search(elem))
         DeleteCurrent();
 }
 
-template <class T>
-void LinkedList<T>::DeleteCurrent()
+ 
+void  List::DeleteCurrent()
 {
     if(length == 0)
         return;
     length--;
-    ListNode<T> * temp = curr;
+     ListNode * temp = curr;
 
     if(temp->prev != nullptr)
         temp->prev->next = temp->next;
@@ -170,8 +168,8 @@ void LinkedList<T>::DeleteCurrent()
      delete temp;
 }
 
-template <class T>
-bool LinkedList<T>::Search(T elem)
+ 
+bool  List::Search(int elem)
 {
     if(length == 0)
         return false;
@@ -183,12 +181,12 @@ bool LinkedList<T>::Search(T elem)
     return false;
 }
 
-template <class T>
-void LinkedList<T>::PutFirstToLast()
+ 
+void  List::PutFirstToLast()
 {
   if(length < 2)
     return;
-  ListNode<T>* temp = head->next;
+   ListNode* temp = head->next;
   head->next->prev = nullptr;
   head->next = nullptr;
   head->prev = tail;
@@ -197,19 +195,19 @@ void LinkedList<T>::PutFirstToLast()
   head = temp;
 }
 
-template <class T>
-void LinkedList<T>::Update(T elem)
+ 
+void  List::Update(int elem)
 {
     if(Search(elem))
         curr->element = elem;
 }
 
-template <class T>
-void LinkedList<T>::Clear()
+ 
+void  List::Clear()
 {
     if(length == 0)
         return;
-    ListNode<T> * temp = head;
+     ListNode * temp = head;
 
     while(temp != nullptr)
     {

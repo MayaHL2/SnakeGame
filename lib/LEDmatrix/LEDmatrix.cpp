@@ -1,4 +1,5 @@
 #include "LEDmatrix.h"
+
  
 void initializePin(){
   pinMode(datapin,OUTPUT);
@@ -23,7 +24,7 @@ void initializePinRow(){
 }
 
 
-void row(int n){
+void rowOn(int n){
   switch (n)
   {
   case 1:
@@ -63,6 +64,46 @@ void row(int n){
   }
 }
 
+void rowOff(int n){
+  switch (n)
+  {
+  case 1:
+    digitalWrite(R1,HIGH);
+    break;
+  
+  case 2:
+    digitalWrite(R2,HIGH);
+    break;
+
+  case 3:
+    digitalWrite(R3,HIGH);
+    break;
+
+  case 4:
+    digitalWrite(R4,HIGH);
+    break;
+  
+  case 5:
+    digitalWrite(R5,HIGH);
+    break;
+  
+  case 6:
+    digitalWrite(R6,HIGH);
+    break;
+  
+  case 7:
+    digitalWrite(R7,HIGH);
+    break;
+
+  case 8:
+    digitalWrite(R8,HIGH);
+    break;
+
+  default:
+    break;
+  }
+}
+
 
 void updateShiftRegister(byte leds){
   digitalWrite(latchpin,LOW);
@@ -71,10 +112,17 @@ void updateShiftRegister(byte leds){
 }
 
 
-void turnOnLED(int pos[]){
-  for (int i = 0; i < 2; i++)
-  {
-    row(pos[i]);
+void turnOnLED(int row, int column){
+  int leds = 0; 
+  for(int i=0 ;i<matrixLen; i++){
+    leds = power(2,i);
+    if(i == column){
+      rowOn(row);
+    }
+    else{
+      rowOff(row);
+    }
+    updateShiftRegister(leds);
+    delay(tDelay);
   }
-  
 }

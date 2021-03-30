@@ -1,4 +1,4 @@
-#include "mathematics.h"
+#include "Mathematics.h"
 
 int power(int x, int n){
   int pow_x = 1;
@@ -7,3 +7,4 @@ int power(int x, int n){
   }
   return pow_x;
 }
+ 

@@ -1,40 +1,28 @@
 #include <Arduino.h>
-#include <LinkedList.h>
+#include <List.h>
 #include <LEDmatrix.h>
-#include <mathematics.h>
+#include <Mathematics.h>
 
-#define matrixLen 5
- 
-LinkedList <int> pos(); 
-
-
-int tDelay=1000;
 int leds=0;
 
+List pos;
 
 void setup() {
   Serial.begin(115200);
 
-  initializePin();
+  pinMode(12,INPUT);
 
-  digitalWrite(R1,LOW);
-  digitalWrite(R2,LOW);
-  digitalWrite(R3,LOW);
-  digitalWrite(R4,LOW);
-  digitalWrite(R5,LOW);
+  pos.Append(2);
+  pos.Append(3);
+  pos.Append(7);
+
+  Serial.println(pos.getLength());
+
+  initializePin();
 
 }
   
 void loop() {
+  turnOnLED(2,3);
 
-  leds=0;
-  for(int i=0 ;i<matrixLen; i++){
-    leds = power(2,i);
-
-    Serial.println(leds);
-
-    updateShiftRegister(leds);
-    delay(tDelay);
-  }  
 }
-
