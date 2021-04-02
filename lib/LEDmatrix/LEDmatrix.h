@@ -8,18 +8,6 @@
 #define matrixLen 5 // size of the LEDmatrix
 #define tDelay 1 // delay of the leds' flashing
 
-/* int datapin = 12;
-    int clockpin = 9;
-    int latchpin = 11; 
-    int R1 = 3;
-    int R2 = 4;
-    int R3 = 5;
-    int R4 = 6;
-    int R5 = 7;
-    int R6 = 11;
-    int R7 = 12;
-    int R8 = 13;*/
-
 class LEDmatrix
 {
 private:

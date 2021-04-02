@@ -131,6 +131,7 @@ void LEDmatrix :: turnOnLED(int row, int column){
   for(int i=0 ;i<matrixLen; i++){
     AllRowOff();
     leds = power(2,i);
+    updateShiftRegister(leds);
     if(i+1 == column){
       rowOn(row);
       Serial.println(i);
@@ -138,7 +139,6 @@ void LEDmatrix :: turnOnLED(int row, int column){
     else{
       rowOff(row);
     }
-    updateShiftRegister(leds);
     delay(tDelay);
   }
   rowOff(row);
@@ -151,13 +151,14 @@ void LEDmatrix :: turnOnLEDs(List positions){
   for(int i=0 ;i<matrixLen; i++){
     AllRowOff();
     leds = power(2,i);
+    updateShiftRegister(leds);
     positionsSameColumn = positions.SearchSameColumn(i+1);
     while(positionsSameColumn.getLength()!=0){
       row = (positionsSameColumn.First()).getRow();
       positionsSameColumn.DeleteFirst();
       rowOn(row);
     }
-    updateShiftRegister(leds);
+    
     delay(tDelay);
   }
   rowOff(row);
