@@ -181,7 +181,31 @@ bool  List::Search(Position elem)
     return false;
 }
 
- 
+
+bool  List::SearchColumn(int column)
+{
+    if(length == 0)
+        return false;
+    if(moveToStart())
+        do {
+            if(curr->element.getColumn() == column)
+                return true;
+        } while (next());
+    return false;
+}
+
+List List::SearchSameColumn(int column)
+{
+    List listSameColumn;
+    
+    while (SearchColumn(column)){
+        listSameColumn.Append(curr->element);
+        DeleteCurrent();
+    }
+    return listSameColumn;
+
+}
+
 void  List::PutFirstToLast()
 {
   if(length < 2)

@@ -2,28 +2,52 @@
 #define LEDmatrix_hpp
 
 #include<Arduino.h>
-#include "Mathematics.h"
-
-#define datapin 12
-#define clockpin 9
-#define latchpin 11 
+#include <Mathematics.h>
+#include <List.h>
 
 #define matrixLen 5 // size of the LEDmatrix
-#define tDelay 1000  // delay of the leds' flashing
+#define tDelay 1 // delay of the leds' flashing
 
-#define R1 3
-#define R2 4
-#define R3 5
-#define R4 6
-#define R5 7
-#define R6 11
-#define R7 12
-#define R8 13
+/* int datapin = 12;
+    int clockpin = 9;
+    int latchpin = 11; 
+    int R1 = 3;
+    int R2 = 4;
+    int R3 = 5;
+    int R4 = 6;
+    int R5 = 7;
+    int R6 = 11;
+    int R7 = 12;
+    int R8 = 13;*/
 
-void initializePinRow(); // initialization of all the pins in a row
-void initializePin(); // initialization of the pins connected to the shift register
-void rowOn(int n); // put row n HIGH
-void updateShiftRegister(byte leds); // put value of the columns as HIGH depending on the value of leds (e.g leds = 1000 => column 1 on the rest off)
-void turnOnLED(int row, int column); // turn on only one led on the LEDmatrix  
+class LEDmatrix
+{
+private:
+
+    int datapin;
+    int clockpin;
+    int latchpin; 
+    int R1;
+    int R2;
+    int R3;
+    int R4;
+    int R5;
+    int R6;
+    int R7;
+    int R8;
+
+public:
+    LEDmatrix(int datapin, int clockpin, int latchpin, int R1, int R2, int R3, int R4, int R5, int R6, int R7, int R8);
+    ~LEDmatrix();
+    void initializePinRow(); // initialization of all the pins in a row
+    void initialize(); // initialization of the pins connected to the shift register
+    void rowOn(int n); // put row n to GND
+    void rowOff(int n); // put row n to VCC
+    void AllRowOff(); // put all rows to VCC
+    void updateShiftRegister(byte leds); // put value of the columns as HIGH depending on the value of leds (e.g leds = 1000 => column 1 on the rest off)
+    void turnOnLED(int row, int column); // turn on only one led on the LEDmatrix  
+    void turnOnLEDs(List positions); //turn on leds on the LEDmatrix depending on the positions given
+};
+
 
 #endif

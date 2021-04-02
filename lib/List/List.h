@@ -39,6 +39,8 @@ class List  {
     bool prev();
     void Delete(Position&);
     bool Search(Position);
+    bool SearchColumn(int column);
+    List SearchSameColumn(int column);
     void Clear();
     void PutFirstToLast();
     void Update(Position elem);

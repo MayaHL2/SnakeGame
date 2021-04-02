@@ -5,30 +5,36 @@
 
 int leds=0;
 
-List pos;
+#define datapin  12
+#define clockpin  9
+#define latchpin  11
+#define R1  3
+#define R2  4
+#define R3  5
+#define R4  6
+#define R5  7
+#define R6  8
+#define R7  10
+#define R8  13
+
+
+
+LEDmatrix matrix(datapin, clockpin, latchpin, R1, R2, R3, R4, R5, R6, R7, R8);
+
+List positions;
 Position pos1(1,2);
-Position pos2(3,1);
-Position pos3(2,5);
+Position pos2(3,4);
 
 void setup() {
   Serial.begin(115200);
+  
+  matrix.initialize();
 
-  pinMode(12,INPUT);
-
-  initializePin();
-
-  pos.Append(pos1);
-  pos.Append(pos2);
-  pos.Append(pos3);
-
-  Serial.println(pos.getLength());
-
-  Serial.println(pos1.inMatrix(5));
-  Serial.println(pos1.inMatrix(1));
 
 }
   
 void loop() {
-  turnOnLED(2,3);
-
+  matrix.turnOnLED(1,2);
+  matrix.turnOnLED(2,2);
+  matrix.turnOnLED(5,5);
 }
