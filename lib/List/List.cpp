@@ -5,9 +5,9 @@
     length = 0;
     head = nullptr;
     tail = nullptr;
-    curr = nullptr;
+    curr = nullptr; 
 }
-
+ 
  
  List::List(const  List & list) {
     length = 0;
@@ -41,11 +41,26 @@
 }
 
  
+void List::operator+=(Position pos){
+
+    head->element+= pos;
+    curr = head->next;
+    while(curr != nullptr)
+    {
+        curr->element += pos; 
+        curr = curr->next;
+   
+    }
+   
+}
+ 
  List::~ List() {
     Clear();
 }
 
- 
+
+
+
 Position&  List::getCurrent()
 {
   return curr->element;
@@ -244,4 +259,17 @@ void  List::Clear()
 
     length = 0;
 
+}
+
+void List::move(Position direction){
+    moveToStart();
+    Position prevElement = curr->element;
+    next();
+    while(curr!= nullptr){
+        Position temp = curr->element;
+        curr->element = prevElement;
+        prevElement = temp;
+        curr = curr->next;
+    }
+    head->element += direction;
 }

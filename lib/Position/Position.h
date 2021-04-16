@@ -10,11 +10,13 @@ public:
   Position(int newRow, int newColumn);
   Position(Position & copy);
   ~Position();
-  Position operator = ( Position);
+  void operator = (Position);
   bool operator == (Position);
+  void operator +=(const Position& );
   int getRow();
   int getColumn();
   bool inMatrix(const int matrixLength);
+  void update(int, int);
 };
 
 // faire en sorte que les positins ne dépasse pas la longueur de la matrice LED

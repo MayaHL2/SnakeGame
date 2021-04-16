@@ -5,7 +5,7 @@ LEDmatrix ::LEDmatrix(int datapin, int clockpin, int latchpin, int R1, int R2, i
 LEDmatrix ::~LEDmatrix(){}
   
 void LEDmatrix :: initialize(){
-  pinMode(datapin,OUTPUT);
+  pinMode(datapin,OUTPUT); 
   pinMode(clockpin,OUTPUT);
   pinMode(latchpin,OUTPUT);
 
@@ -134,7 +134,6 @@ void LEDmatrix :: turnOnLED(int row, int column){
     updateShiftRegister(leds);
     if(i+1 == column){
       rowOn(row);
-      Serial.println(i);
     }
     else{
       rowOff(row);

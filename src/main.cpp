@@ -2,6 +2,7 @@
 #include <List.h>
 #include <LEDmatrix.h>
 #include <Mathematics.h>
+#include <SnakeGame.h>
 
 int leds=0;
 
@@ -17,24 +18,45 @@ int leds=0;
 #define R7  10
 #define R8  13
 
+#define leftButton 8
+#define rightButton 8
+#define upButton 8
+#define downButton 8
 
 
 LEDmatrix matrix(datapin, clockpin, latchpin, R1, R2, R3, R4, R5, R6, R7, R8);
+Position apple(0,0);
+List snake;
+SnakeGame game(leftButton, rightButton,upButton,downButton,matrix,snake,apple);
 
-List positions;
-Position pos1(1,2);
-Position pos2(3,4);
+
+Position newDirection(0,0); 
+Position prevDirection(1,0);
+Position initialCond(0,0);
+List prevSnake;
 
 void setup() {
   Serial.begin(115200);
-  
-  matrix.initialize();
-
+  game.initialize();
+  Serial.println("Hey");
 
 }
   
-void loop() {
-  matrix.turnOnLED(1,2);
-  matrix.turnOnLED(2,2);
-  matrix.turnOnLED(5,5);
+void loop(){
+  
+game.updateDirection(newDirection);
+prevSnake = game.getSnake();
+if(newDirection==initialCond){
+  game.forward(prevDirection);
 }
+else{
+  game.turn(newDirection);
+  prevDirection = newDirection;
+}
+if(game.eatApple()){
+  game.updateSnake(prevSnake);
+  game.randomApple();
+}
+}
+
+// List et Positions sont complètes et correctes

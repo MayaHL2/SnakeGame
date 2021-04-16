@@ -3,7 +3,7 @@
 
 #include <Position.h>
 
-class ListNode {
+class ListNode { 
   public:
     Position element;
     ListNode* next;
@@ -45,6 +45,8 @@ class List  {
     void PutFirstToLast();
     void Update(Position elem);
     List& operator = (const List&);
+    void operator += (Position);
+    void move(Position);
 };
 
 // S'assurer que les positions sont toutes différentes les unes des autres 

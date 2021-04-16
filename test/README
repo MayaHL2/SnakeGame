@@ -1,3 +1,30 @@
+List positions;
+Position pos1(1,2);
+Position pos2(3,4);
+Position pos3(2,4);
+Position direc(1,0);
+ 
+ positions.Append(pos1);
+  positions.Append(pos2);
+  positions.Append(pos3);
+  
+  positions.move(direc);
+
+  positions.moveToStart();
+  Position pos = positions.getCurrent();
+  Serial.println(pos.getRow());
+  Serial.println(pos.getColumn());
+
+
+  positions.next();
+  pos = positions.getCurrent();
+  Serial.println(pos.getRow());
+  Serial.println(pos.getColumn());
+
+  positions.next();
+  pos = positions.getCurrent();
+  Serial.println(pos.getRow());
+  Serial.println(pos.getColumn());
 
 This directory is intended for PlatformIO Unit Testing and project tests.
 

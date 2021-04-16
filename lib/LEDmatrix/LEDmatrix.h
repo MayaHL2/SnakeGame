@@ -30,7 +30,7 @@ public:
     void initializePinRow(); // initialization of all the pins in a row
     void initialize(); // initialization of the pins connected to the shift register
     void rowOn(int n); // put row n to GND
-    void rowOff(int n); // put row n to VCC
+    void rowOff(int n); // put row n to VCC 
     void AllRowOff(); // put all rows to VCC
     void updateShiftRegister(byte leds); // put value of the columns as HIGH depending on the value of leds (e.g leds = 1000 => column 1 on the rest off)
     void turnOnLED(int row, int column); // turn on only one led on the LEDmatrix  
