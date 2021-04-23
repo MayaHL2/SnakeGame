@@ -3,7 +3,7 @@
 
 #include<LEDmatrix.h>
 
-#define speedDecay 10 
+#define speedDecay 10
 
 class SnakeGame
 {
@@ -29,6 +29,8 @@ public:
     void turnOnGame();//turning on the matrix with a picture of the game
     bool eatApple();// is the head of the snake on top of the apple
     void updateSpeed(); //updates the speed of the snake and makes it go quicker
+    void levelUp(List snakePrev); //if apple was eaten updates the snake, the apple and the speed
+    bool correctNewDirection(); //if leftButton is activated makes sure snake is not going right and vice versa (same with up and down)
 };
 
  

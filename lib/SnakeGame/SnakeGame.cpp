@@ -83,5 +83,22 @@ List SnakeGame::getSnake(){
 }
 
 void SnakeGame::updateSpeed(){
+    if(actualSpeed - speedDecay <100){
+        actualSpeed = 100;
+    }
+    else{
     actualSpeed -= speedDecay;
+    }
+}
+
+void SnakeGame::levelUp(List snakePrev){
+    if(eatApple()){
+      updateSnake(snakePrev);
+      randomApple();
+      updateSpeed();
+    }    
+}
+
+bool SnakeGame::correctNewDirection(){
+    return 1;
 }

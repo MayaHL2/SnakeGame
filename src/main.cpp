@@ -52,18 +52,24 @@ void setup() {
 void loop(){
   game.forward(prevDirection);
   game.updateDirection(newDirection);
+  game.levelUp(prevSnake);
   
   prevSnake = game.getSnake();
   if(newDirection==forwardDirection){
     game.forward(prevDirection);
+    game.levelUp(prevSnake);
+    
   }
   else{
     game.turn(newDirection);
+    game.levelUp(prevSnake);
     prevDirection = newDirection;
+    
   }
-  if(game.eatApple()){
-    game.updateSnake(prevSnake);
-    game.randomApple();
-    game.updateSpeed();
-  }
+  
 }
+
+// pause game
+// game over 
+// when you go right you cannot clic on left and vice versa
+// when you go up you cannot clic down and vice versa

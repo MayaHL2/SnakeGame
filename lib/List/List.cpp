@@ -280,13 +280,13 @@ void List::move(Position direction, int maxPosition){
     {
         head->element.column = 1; 
     }
-    if (head->element.getRow()<0)
+    if (head->element.getRow()<1)
     {
-        head->element.row = 5; 
+        head->element.row = maxPosition; 
     }
-    if (head->element.getColumn()<0)
+    if (head->element.getColumn()<1)
     {
-        head->element.column = 5; 
+        head->element.column = maxPosition; 
     }
     
 }
