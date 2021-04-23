@@ -261,7 +261,7 @@ void  List::Clear()
 
 }
 
-void List::move(Position direction){
+void List::move(Position direction, int maxPosition){
     moveToStart();
     Position prevElement = curr->element;
     next();
@@ -272,4 +272,21 @@ void List::move(Position direction){
         curr = curr->next;
     }
     head->element += direction;
+    if (head->element.getRow()>maxPosition)
+    {
+        head->element.row = 1; 
+    }
+    if (head->element.getColumn()>maxPosition)
+    {
+        head->element.column = 1; 
+    }
+    if (head->element.getRow()<0)
+    {
+        head->element.row = 5; 
+    }
+    if (head->element.getColumn()<0)
+    {
+        head->element.column = 5; 
+    }
+    
 }

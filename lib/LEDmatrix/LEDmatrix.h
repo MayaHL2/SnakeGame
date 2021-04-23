@@ -6,7 +6,7 @@
 #include <List.h>
 
 #define matrixLen 5 // size of the LEDmatrix
-#define tDelay 1 // delay of the leds' flashing
+#define tDelay 1// delay of the leds' flashing
 
 class LEDmatrix
 {
@@ -35,6 +35,7 @@ public:
     void updateShiftRegister(byte leds); // put value of the columns as HIGH depending on the value of leds (e.g leds = 1000 => column 1 on the rest off)
     void turnOnLED(int row, int column); // turn on only one led on the LEDmatrix  
     void turnOnLEDs(List positions); //turn on leds on the LEDmatrix depending on the positions given
+    void turnOnLEDsDelay(List positions, int delay);
 };
 
 

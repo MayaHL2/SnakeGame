@@ -4,16 +4,18 @@
 #include <Position.h>
 
 class ListNode { 
-  public:
+  private:
     Position element;
     ListNode* next;
     ListNode* prev;
-
+  public:
     ListNode(Position element, ListNode* prev, ListNode* next) : element(element)
     {
       this->next = next;
       this->prev = prev;
     };
+  friend class List; 
+
 };
 
 class List  {
@@ -46,7 +48,7 @@ class List  {
     void Update(Position elem);
     List& operator = (const List&);
     void operator += (Position);
-    void move(Position);
+    void move(Position, int maxPosition);
 };
 
 // S'assurer que les positions sont toutes différentes les unes des autres 

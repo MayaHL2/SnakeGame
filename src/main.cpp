@@ -14,49 +14,56 @@ int leds=0;
 #define R3  5
 #define R4  6
 #define R5  7
-#define R6  8
-#define R7  10
-#define R8  13
+#define R6  A0
+#define R7  A1
+#define R8  A2
 
 #define leftButton 8
-#define rightButton 8
-#define upButton 8
+#define rightButton 10
+#define upButton 13 
 #define downButton 8
 
+#define initialSpeed 1000
 
 LEDmatrix matrix(datapin, clockpin, latchpin, R1, R2, R3, R4, R5, R6, R7, R8);
 Position apple(0,0);
 List snake;
-SnakeGame game(leftButton, rightButton,upButton,downButton,matrix,snake,apple);
+SnakeGame game(leftButton, rightButton,upButton,downButton,matrix,snake,apple,initialSpeed);
 
 
 Position newDirection(0,0); 
 Position prevDirection(1,0);
-Position initialCond(0,0);
+Position forwardDirection(0,0);
 List prevSnake;
+Position prev1(1,1);
+Position prev2(1,2);
+
+
 
 void setup() {
   Serial.begin(115200);
+  
+  prevSnake.Append(prev1);
+  prevSnake.Append(prev2);
   game.initialize();
-  Serial.println("Hey");
 
 }
   
 void loop(){
-  
-game.updateDirection(newDirection);
-prevSnake = game.getSnake();
-if(newDirection==initialCond){
   game.forward(prevDirection);
+  game.updateDirection(newDirection);
+  
+  prevSnake = game.getSnake();
+  if(newDirection==forwardDirection){
+    game.forward(prevDirection);
+  }
+  else{
+    game.turn(newDirection);
+    prevDirection = newDirection;
+  }
+  if(game.eatApple()){
+    game.updateSnake(prevSnake);
+    game.randomApple();
+    game.updateSpeed();
+  }
 }
-else{
-  game.turn(newDirection);
-  prevDirection = newDirection;
-}
-if(game.eatApple()){
-  game.updateSnake(prevSnake);
-  game.randomApple();
-}
-}
-
-// List et Positions sont complètes et correctes

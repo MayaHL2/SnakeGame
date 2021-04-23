@@ -17,6 +17,7 @@ public:
   int getColumn();
   bool inMatrix(const int matrixLength);
   void update(int, int);
+friend class List; 
 };
 
 // faire en sorte que les positins ne dépasse pas la longueur de la matrice LED

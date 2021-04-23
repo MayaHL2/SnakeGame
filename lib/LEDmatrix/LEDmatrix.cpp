@@ -160,5 +160,14 @@ void LEDmatrix :: turnOnLEDs(List positions){
     
     delay(tDelay);
   }
-  rowOff(row);
+  //rowOff(row);
+}
+
+
+
+void LEDmatrix::turnOnLEDsDelay(List positions, int delay){
+  float time1 = millis();
+  while(abs(time1-millis())<delay){
+    turnOnLEDs(positions);
+  }
 }

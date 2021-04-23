@@ -1,6 +1,6 @@
 #include<SnakeGame.h>
 
-SnakeGame :: SnakeGame(int leftButton,int rightButton, int upButton,int downButton,LEDmatrix matrix, List snake, Position apple): leftButton(leftButton), rightButton(rightButton), upButton(upButton), downButton(downButton), matrix(matrix),snake(snake),apple(apple)
+SnakeGame :: SnakeGame(int leftButton,int rightButton, int upButton,int downButton,LEDmatrix matrix, List snake, Position apple, int initialSpeed): leftButton(leftButton), rightButton(rightButton), upButton(upButton), downButton(downButton), matrix(matrix),snake(snake),apple(apple), actualSpeed(initialSpeed)
 {} 
 
 SnakeGame ::~SnakeGame(){}
@@ -14,20 +14,22 @@ void SnakeGame :: initialize(){
 
     List temp;
     Position initial(1,1);
-    randomApple();
+    randomApple(); 
     temp.Append(initial); 
+    initial.update(2,1);
+    temp.Append(initial);
     snake = temp;
     turnOnGame();
 }
 
 
 void SnakeGame :: forward(Position directionPrev){
-    snake.move(directionPrev);
+    snake.move(directionPrev,matrixLen);
     turnOnGame();
 }
 
 void SnakeGame ::turn(Position direction){
-    snake.move(direction);
+    snake.move(direction,matrixLen);
     turnOnGame();
 }
 
@@ -35,15 +37,19 @@ void SnakeGame ::updateDirection(Position& directionSnake){
     directionSnake.update(0,0);
     if(digitalRead(leftButton)){
         directionSnake.update(-1,0);
+        Serial.println("L");
     }
     else if (digitalRead(rightButton)){
         directionSnake.update(1,0);
+        Serial.println("R");
     }
     else if (digitalRead(upButton)){
         directionSnake.update(0,1);
+        Serial.println("U");
     }    
     else if (digitalRead(downButton)){
         directionSnake.update(0,-1);
+        Serial.println("D");
     }
 }
 
@@ -54,8 +60,8 @@ void SnakeGame::updateSnake(List snakePrev){
 
 void SnakeGame::turnOnGame(){
     List temp = snake; 
-    temp.Append(apple);
-    matrix.turnOnLEDs(temp);
+    temp.Append(apple);  
+    matrix.turnOnLEDsDelay(temp,actualSpeed);
 }
 
 void SnakeGame::randomApple(){
@@ -74,4 +80,8 @@ bool SnakeGame::eatApple(){
 
 List SnakeGame::getSnake(){
     return snake;
+}
+
+void SnakeGame::updateSpeed(){
+    actualSpeed -= speedDecay;
 }
